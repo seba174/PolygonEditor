@@ -46,6 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Edge.cs" />
+    <Compile Include="EdgeState.cs" />
+    <Compile Include="IClickable.cs" />
+    <Compile Include="IPolygon.cs" />
+    <Compile Include="Polygon.cs" />
     <Compile Include="PolygonEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,6 +59,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vertice.cs" />
     <EmbeddedResource Include="PolygonEditor.resx">
       <DependentUpon>PolygonEditor.cs</DependentUpon>
     </EmbeddedResource>
