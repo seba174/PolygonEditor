@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace PolygonEditor
 {
-    public partial class Form1 : Form
+    public partial class PolygonEditor : Form
     {
-        public Form1()
+        public PolygonEditor()
         {
             InitializeComponent();
         }
