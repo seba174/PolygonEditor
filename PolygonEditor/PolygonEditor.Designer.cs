@@ -46,6 +46,7 @@
             this.ChangeLengthButton = new System.Windows.Forms.Button();
             this.RemoveConstraintsButton = new System.Windows.Forms.Button();
             this.SplitButton = new System.Windows.Forms.Button();
+            this.drawingArea = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.CreateGroupBox.SuspendLayout();
@@ -54,6 +55,7 @@
             this.EditVerticeTableLayoutPanel.SuspendLayout();
             this.EditEdgeGroupBox.SuspendLayout();
             this.EditEdgeTableLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.drawingArea)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -62,6 +64,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80.0813F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 19.9187F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.drawingArea, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -275,6 +278,16 @@
             this.SplitButton.Text = "Split";
             this.SplitButton.UseVisualStyleBackColor = true;
             // 
+            // drawingArea
+            // 
+            this.drawingArea.BackColor = System.Drawing.Color.White;
+            this.drawingArea.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.drawingArea.Location = new System.Drawing.Point(3, 3);
+            this.drawingArea.Name = "drawingArea";
+            this.drawingArea.Size = new System.Drawing.Size(781, 655);
+            this.drawingArea.TabIndex = 1;
+            this.drawingArea.TabStop = false;
+            // 
             // PolygonEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -291,6 +304,7 @@
             this.EditVerticeTableLayoutPanel.ResumeLayout(false);
             this.EditEdgeGroupBox.ResumeLayout(false);
             this.EditEdgeTableLayoutPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.drawingArea)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -315,6 +329,7 @@
         private System.Windows.Forms.Button ChangeLengthButton;
         private System.Windows.Forms.Button RemoveConstraintsButton;
         private System.Windows.Forms.Button SplitButton;
+        private System.Windows.Forms.PictureBox drawingArea;
     }
 }
 

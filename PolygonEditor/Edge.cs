@@ -9,12 +9,6 @@ namespace PolygonEditor
         public EdgeType Type { get; set; }
         public int Length { get; set; }
 
-        public Edge(Vertice endpoint1, Vertice endpoint2)
-        {
-            this.Endpoint1 = endpoint1;
-            this.Endpoint2 = endpoint2;
-        }
-
         public Vertice GetSecondEndpoint(Vertice endpoint)
         {
             return endpoint == Endpoint1 ? Endpoint2 : Endpoint1;

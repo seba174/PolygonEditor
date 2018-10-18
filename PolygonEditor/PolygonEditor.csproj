@@ -47,9 +47,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Edge.cs" />
-    <Compile Include="EdgeState.cs" />
+    <Compile Include="EdgeType.cs" />
     <Compile Include="IClickable.cs" />
+    <Compile Include="InputHandler.cs" />
     <Compile Include="IPolygon.cs" />
+    <Compile Include="PointUtilities.cs" />
     <Compile Include="Polygon.cs" />
     <Compile Include="PolygonEditor.cs">
       <SubType>Form</SubType>

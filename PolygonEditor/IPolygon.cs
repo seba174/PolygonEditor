@@ -9,8 +9,12 @@ namespace PolygonEditor
 {
     public interface IPolygon
     {
-        IEnumerable<IClickable> GetClickableElements();
-        bool HandleClickableMove(IClickable vertice, Point newPosition);
+        IEnumerable<IClickable> Clickables { get; }
+
+        bool HandleClickableMove(IClickable vertice, Point offset);
+
         bool HandlePolygonMove(Point offset);
+
+        bool ChangeEdgeType(Edge edge, EdgeType edgeType, int lenght);
     }
 }
