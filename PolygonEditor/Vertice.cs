@@ -4,7 +4,8 @@ namespace PolygonEditor
 {
     public class Vertice : IClickable
     {
-        public static int Radius { get; set; }
+        public static int ClickRadius { get; set; }
+
         public Point Position { get; set; }
         public Edge Edge1 { get; set; }
         public Edge Edge2 { get; set; }
@@ -26,7 +27,7 @@ namespace PolygonEditor
         {
             int dx = this.Position.X - position.X;
             int dy = this.Position.Y - position.Y;
-            return dx * dx + dy * dy <= Radius * Radius;
+            return dx * dx + dy * dy <= ClickRadius * ClickRadius;
         }
     }
 }

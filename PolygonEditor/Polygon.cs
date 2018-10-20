@@ -2,27 +2,20 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PolygonEditor
 {
     public class Polygon : IPolygon
     {
-        private readonly List<Vertice> vertices;
-        private readonly List<Edge> edges;
+        public IEnumerable<Vertice> Vertices { get; private set; }
+        public IEnumerable<Edge> Edges { get; private set; }
+        public IEnumerable<IClickable> Clickables => Vertices.Concat(Edges.Cast<IClickable>());
 
-        public Polygon(List<Vertice> vertices, List<Edge> edges)
+        public Polygon(IEnumerable<Vertice> vertices, IEnumerable<Edge> edges)
         {
-            this.vertices = vertices;
-            this.edges = edges;
+            this.Vertices = vertices;
+            this.Edges = edges;
         }
-
-        public IEnumerable<IClickable> Clickables => vertices.Concat(edges.Cast<IClickable>());
-
-        public IEnumerable<Vertice> Vertices => vertices;
-
-        public IEnumerable<Edge> Edges => edges;
 
         public bool HandleClickableMove(IClickable clickable, Point offset)
         {
@@ -35,7 +28,12 @@ namespace PolygonEditor
 
         public bool HandlePolygonMove(Point offset)
         {
-            throw new NotImplementedException();
+            foreach (var vertice in Vertices)
+            {
+                vertice.Position = new Point(vertice.Position.X + offset.X, vertice.Position.Y + offset.Y);
+            }
+
+            return true;
         }
 
         public bool ChangeEdgeType(Edge edge, EdgeType edgeType, int lenght = -1)
@@ -43,20 +41,39 @@ namespace PolygonEditor
             edge.Type = edgeType;
             edge.Length = lenght;
             if (MoveVerticeSafely(edge.Endpoint1, new Point()))
+            {
                 return true;
+            }
+
             return MoveVerticeSafely(edge.Endpoint2, new Point());
         }
 
         private bool MoveVerticeSafely(Vertice original, Point offset)
         {
-            List<Point> oldPositions = vertices.Select(v => v.Position).ToList();
-            original.Position = new Point(original.Position.X + offset.X, original.Position.Y + offset.Y);
+            List<Point> oldPositions = Vertices.Select(v => v.Position).ToList();
+            Point newPosition = new Point(original.Position.X + offset.X, original.Position.Y + offset.Y);
+            original.Position = newPosition;
 
-            if(RepairEdges(original, original.Edge1))
+            if (RepairEdges(original, original.Edge1))
+            {
                 return true;
+            }
 
-            for (int i = 0; i < vertices.Count; i++)
-                vertices[i].Position = oldPositions[i];
+            foreach (var vertice in Vertices.Select((Value, Index) => new { Value, Index }))
+            {
+                vertice.Value.Position = oldPositions[vertice.Index];
+            }
+
+            original.Position = newPosition;
+            if (RepairEdges(original, original.Edge2))
+            {
+                return true;
+            }
+
+            foreach (var vertice in Vertices.Select((Value, Index) => new { Value, Index }))
+            {
+                vertice.Value.Position = oldPositions[vertice.Index];
+            }
 
             return false;
         }
@@ -71,7 +88,9 @@ namespace PolygonEditor
         {
             var otherVertice = edge.GetSecondEndpoint(vertice);
             if (otherVertice == start)
+            {
                 return false;
+            }
 
             if (edge.Type == EdgeType.Vertical)
             {
@@ -81,7 +100,7 @@ namespace PolygonEditor
                     return RepairEdgeRecursion(otherVertice, otherVertice.GetSecondEdge(edge), start);
                 }
             }
-            else if(edge.Type == EdgeType.Horizontal)
+            else if (edge.Type == EdgeType.Horizontal)
             {
                 if (Math.Abs(vertice.Position.Y - otherVertice.Position.Y) != 0)
                 {
@@ -89,7 +108,7 @@ namespace PolygonEditor
                     return RepairEdgeRecursion(otherVertice, otherVertice.GetSecondEdge(edge), start);
                 }
             }
-            else if(edge.Type == EdgeType.FixedLength)
+            else if (edge.Type == EdgeType.FixedLength)
             {
                 otherVertice.Position = PointUtilities.GetPointOnLineWithSpecificDistanceFromStart(vertice.Position, otherVertice.Position, edge.Length);
                 return RepairEdgeRecursion(otherVertice, otherVertice.GetSecondEdge(edge), start);
@@ -107,7 +126,10 @@ namespace PolygonEditor
             };
             v1.Edge2 = edge;
             v2.Edge1 = edge;
-            edges.Add(edge);
+
+            var edgesList = Edges.ToList();
+            edgesList.Add(edge);
+            Edges = edgesList;
         }
     }
 }
