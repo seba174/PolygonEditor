@@ -40,6 +40,7 @@ namespace PolygonEditor
 
                 vertices[leftVerticeIndex].Edge2 = edge;
                 vertices[rightVerticeIndex].Edge1 = edge;
+                edges.Add(edge);
             }
 
             return new Polygon(vertices, edges);
