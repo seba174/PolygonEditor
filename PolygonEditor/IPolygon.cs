@@ -11,7 +11,11 @@ namespace PolygonEditor
     {
         IEnumerable<IClickable> Clickables { get; }
 
-        bool HandleClickableMove(IClickable vertice, Point offset);
+        IEnumerable<Vertice> Vertices { get; }
+
+        IEnumerable<Edge> Edges { get; }
+
+        bool HandleClickableMove(IClickable clickableElement, Point offset);
 
         bool HandlePolygonMove(Point offset);
 

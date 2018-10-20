@@ -20,6 +20,10 @@ namespace PolygonEditor
 
         public IEnumerable<IClickable> Clickables => vertices.Concat(edges.Cast<IClickable>());
 
+        public IEnumerable<Vertice> Vertices => vertices;
+
+        public IEnumerable<Edge> Edges => edges;
+
         public bool HandleClickableMove(IClickable clickable, Point offset)
         {
             if (clickable is Vertice vertice)
