@@ -4,6 +4,8 @@ namespace PolygonEditor
 {
     public class Edge : IClickable
     {
+        public static int ClickDistance { get; set; }
+
         public Vertice Endpoint1 { get; set; }
         public Vertice Endpoint2 { get; set; }
         public EdgeType Type { get; set; }
@@ -16,7 +18,7 @@ namespace PolygonEditor
 
         bool IClickable.IsClicked(Point position)
         {
-            return false;
+            return PointUtilities.GetDistanceFromEdge(this, position) < ClickDistance;
         }
     }
 }
