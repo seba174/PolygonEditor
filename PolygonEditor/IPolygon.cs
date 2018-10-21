@@ -15,6 +15,8 @@ namespace PolygonEditor
 
         bool HandlePolygonMove(Point offset);
 
+        bool DeleteVertice(Vertice v);
+
         bool ChangeEdgeType(Edge edge, EdgeType edgeType, int lenght);
     }
 }

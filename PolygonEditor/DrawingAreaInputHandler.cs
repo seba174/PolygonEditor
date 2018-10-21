@@ -94,6 +94,13 @@ namespace PolygonEditor
             }
         }
 
+        public void ClearSelected()
+        {
+            SelectedElement = null;
+            SelectedPolygon = null;
+            OnElementUnselection?.Invoke();
+        }
+
         private void SetSelectedElements(Point mousePosition)
         {
             if (HandledPolygons == null)
@@ -113,13 +120,6 @@ namespace PolygonEditor
             }
 
             ClearSelected();
-        }
-
-        private void ClearSelected()
-        {
-            SelectedElement = null;
-            SelectedPolygon = null;
-            OnElementUnselection?.Invoke();
         }
     }
 }

@@ -38,14 +38,42 @@ namespace PolygonEditor
 
         public bool ChangeEdgeType(Edge edge, EdgeType edgeType, int lenght = -1)
         {
+            EdgeType oldType = edge.Type;
+            int oldLenght = edge.Length;
+
             edge.Type = edgeType;
             edge.Length = lenght;
-            if (MoveVerticeSafely(edge.Endpoint1, new Point()))
+
+            if (MoveVerticeSafely(edge.Endpoint1, new Point()) || MoveVerticeSafely(edge.Endpoint2, new Point()))
             {
                 return true;
             }
 
-            return MoveVerticeSafely(edge.Endpoint2, new Point());
+            edge.Type = oldType;
+            edge.Length = oldLenght;
+            return false;
+        }
+
+        public bool DeleteVertice(Vertice v)
+        {
+            List<Vertice> verticesList = Vertices.ToList();
+            List<Edge> edgesList = Edges.ToList();
+            if (verticesList.Count <= 3)
+                return false;
+
+            var neighbour1 = v.Edges[0].GetSecondEndpoint(v);
+            var neighbour2 = v.Edges[1].GetSecondEndpoint(v);
+            neighbour1.DisconnectEdge(v.Edges[0]);
+            neighbour2.DisconnectEdge(v.Edges[1]);
+
+            edgesList.RemoveAll(e => v.Edges.Contains(e));
+            verticesList.Remove(v);
+
+            Vertices = verticesList;
+            Edges = edgesList;
+
+            CreateEdgeBetweenVertices(neighbour1, neighbour2);
+            return true;
         }
 
         private bool MoveVerticeSafely(Vertice original, Point offset)
@@ -54,7 +82,7 @@ namespace PolygonEditor
             Point newPosition = new Point(original.Position.X + offset.X, original.Position.Y + offset.Y);
             original.Position = newPosition;
 
-            if (RepairEdges(original, original.Edge1))
+            if (RepairEdges(original, original.Edges[0]))
             {
                 return true;
             }
@@ -65,7 +93,7 @@ namespace PolygonEditor
             }
 
             original.Position = newPosition;
-            if (RepairEdges(original, original.Edge2))
+            if (RepairEdges(original, original.Edges[1]))
             {
                 return true;
             }
@@ -124,8 +152,9 @@ namespace PolygonEditor
                 Endpoint1 = v1,
                 Endpoint2 = v2,
             };
-            v1.Edge2 = edge;
-            v2.Edge1 = edge;
+
+            v1.ConnectEdge(edge);
+            v2.ConnectEdge(edge);
 
             var edgesList = Edges.ToList();
             edgesList.Add(edge);

@@ -38,8 +38,8 @@ namespace PolygonEditor
                     edge.Length = (int)PointUtilities.GetDistanceBetweenPoints(edge.Endpoint1.Position, edge.Endpoint2.Position);
                 }
 
-                vertices[leftVerticeIndex].Edge2 = edge;
-                vertices[rightVerticeIndex].Edge1 = edge;
+                vertices[leftVerticeIndex].Edges[1] = edge;
+                vertices[rightVerticeIndex].Edges[0] = edge;
                 edges.Add(edge);
             }
 

@@ -7,20 +7,39 @@ namespace PolygonEditor
         public static int ClickRadius { get; set; }
 
         public Point Position { get; set; }
-        public Edge Edge1 { get; set; }
-        public Edge Edge2 { get; set; }
+        public Edge[] Edges { get; private set; }
 
-        public Vertice() { }
+        public Vertice() => Edges = new Edge[2];
 
         public Vertice(Edge edge1, Edge edge2)
         {
-            this.Edge1 = edge1;
-            this.Edge2 = edge2;
+            Edges = new Edge[] { edge1, edge2 };
         }
 
         public Edge GetSecondEdge(Edge e)
         {
-            return e == Edge1 ? Edge2 : Edge1;
+            return e == Edges[0] ? Edges[1] : Edges[0];
+        }
+
+        public void DisconnectEdge(Edge e)
+        {
+            for (int i = 0; i < Edges.Length; i++)
+            {
+                if (Edges[i] == e)
+                    Edges[i] = null;
+            }
+        }
+
+        public void ConnectEdge(Edge e)
+        {
+            for (int i = 0; i < Edges.Length; i++)
+            {
+                if (Edges[i] == null)
+                {
+                    Edges[i] = e;
+                    return;
+                }
+            }
         }
 
         bool IClickable.IsClicked(Point position)
