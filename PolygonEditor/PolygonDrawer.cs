@@ -17,7 +17,7 @@ namespace PolygonEditor
             using (Pen pen = new Pen(EdgeColor, EdgeThickness))
             {
                 foreach (Edge edge in polygon.Edges)
-                    graphics.DrawLine(pen, edge.Endpoint1.Position, edge.Endpoint2.Position);
+                    graphics.DrawLine(pen, edge.Endpoints[0].Position, edge.Endpoints[1].Position);
             }
 
             using (Brush b = new SolidBrush(VerticeInsideColor))

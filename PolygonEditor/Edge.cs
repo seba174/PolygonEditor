@@ -6,14 +6,15 @@ namespace PolygonEditor
     {
         public static int ClickDistance { get; set; }
 
-        public Vertice Endpoint1 { get; set; }
-        public Vertice Endpoint2 { get; set; }
+        public Vertice[] Endpoints { get; private set; }
         public EdgeType Type { get; set; }
         public int Length { get; set; }
 
+        public Edge() => Endpoints = new Vertice[2]; 
+
         public Vertice GetSecondEndpoint(Vertice endpoint)
         {
-            return endpoint == Endpoint1 ? Endpoint2 : Endpoint1;
+            return endpoint == Endpoints[0] ? Endpoints[1] : Endpoints[0];
         }
 
         bool IClickable.IsClicked(Point position)

@@ -29,13 +29,13 @@ namespace PolygonEditor
 
                 Edge edge = new Edge
                 {
-                    Endpoint1 = vertices[leftVerticeIndex],
-                    Endpoint2 = vertices[rightVerticeIndex],
                     Type = edgeTypes[i]
                 };
+                edge.Endpoints[0] = vertices[leftVerticeIndex];
+                edge.Endpoints[1] = vertices[rightVerticeIndex];
                 if (edge.Type == EdgeType.FixedLength)
                 {
-                    edge.Length = (int)PointUtilities.GetDistanceBetweenPoints(edge.Endpoint1.Position, edge.Endpoint2.Position);
+                    edge.Length = (int)PointUtilities.GetDistanceBetweenPoints(edge.Endpoints[0].Position, edge.Endpoints[1].Position);
                 }
 
                 vertices[leftVerticeIndex].Edges[1] = edge;

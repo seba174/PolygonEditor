@@ -44,7 +44,7 @@ namespace PolygonEditor
             edge.Type = edgeType;
             edge.Length = lenght;
 
-            if (MoveVerticeSafely(edge.Endpoint1, new Point()) || MoveVerticeSafely(edge.Endpoint2, new Point()))
+            if (MoveVerticeSafely(edge.Endpoints[0], new Point()) || MoveVerticeSafely(edge.Endpoints[1], new Point()))
             {
                 return true;
             }
@@ -59,7 +59,9 @@ namespace PolygonEditor
             List<Vertice> verticesList = Vertices.ToList();
             List<Edge> edgesList = Edges.ToList();
             if (verticesList.Count <= 3)
+            {
                 return false;
+            }
 
             var neighbour1 = v.Edges[0].GetSecondEndpoint(v);
             var neighbour2 = v.Edges[1].GetSecondEndpoint(v);
@@ -74,6 +76,30 @@ namespace PolygonEditor
 
             CreateEdgeBetweenVertices(neighbour1, neighbour2);
             return true;
+        }
+
+        public void SplitEdge(Edge e)
+        {
+            foreach (var vertice in e.Endpoints)
+                vertice.DisconnectEdge(e);
+
+            var middleOfEdge = PointUtilities.GetPointInTheMiddleOfSegment(e.Endpoints[0].Position, e.Endpoints[1].Position);
+            Vertice v = new Vertice
+            {
+                Position = middleOfEdge
+            };
+
+            CreateEdgeBetweenVertices(v, e.Endpoints[0]);
+            CreateEdgeBetweenVertices(v, e.Endpoints[1]);
+
+            List<Vertice> verticesList = Vertices.ToList();
+            List<Edge> edgesList = Edges.ToList();
+
+            verticesList.Add(v);
+            edgesList.Remove(e);
+
+            Vertices = verticesList;
+            Edges = edgesList;
         }
 
         private bool MoveVerticeSafely(Vertice original, Point offset)
@@ -147,11 +173,12 @@ namespace PolygonEditor
 
         private void CreateEdgeBetweenVertices(Vertice v1, Vertice v2)
         {
-            Edge edge = new Edge
+            Edge edge = new Edge()
             {
-                Endpoint1 = v1,
-                Endpoint2 = v2,
+                Type = EdgeType.Normal
             };
+            edge.Endpoints[0] = v1;
+            edge.Endpoints[1] = v2;
 
             v1.ConnectEdge(edge);
             v2.ConnectEdge(edge);

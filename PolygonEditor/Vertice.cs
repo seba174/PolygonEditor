@@ -11,10 +11,7 @@ namespace PolygonEditor
 
         public Vertice() => Edges = new Edge[2];
 
-        public Vertice(Edge edge1, Edge edge2)
-        {
-            Edges = new Edge[] { edge1, edge2 };
-        }
+        public Vertice(Edge edge1, Edge edge2) => Edges = new Edge[] { edge1, edge2 };
 
         public Edge GetSecondEdge(Edge e)
         {
@@ -26,7 +23,9 @@ namespace PolygonEditor
             for (int i = 0; i < Edges.Length; i++)
             {
                 if (Edges[i] == e)
+                {
                     Edges[i] = null;
+                }
             }
         }
 

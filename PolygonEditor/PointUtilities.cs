@@ -23,8 +23,8 @@ namespace PolygonEditor
 
         public static double GetDistanceFromEdge(Edge edge, Point point)
         {
-            Point v1 = edge.Endpoint1.Position;
-            Point v2 = edge.Endpoint2.Position;
+            Point v1 = edge.Endpoints[0].Position;
+            Point v2 = edge.Endpoints[1].Position;
             double dx = v2.X - v1.X;
             double dy = v2.Y - v1.Y;
             double dotProduct = (point.X - v1.X) * dx + (point.Y - v1.Y) * dy;
@@ -55,6 +55,12 @@ namespace PolygonEditor
             dy = point.Y - dy;
 
             return Math.Sqrt(dx * dx + dy * dy);
+        }
+
+        public static Point GetPointInTheMiddleOfSegment(Point lineSegmentStart, Point lineSegmentEnd)
+        {
+            double lenght = GetDistanceBetweenPoints(lineSegmentStart, lineSegmentEnd);
+            return GetPointOnLineWithSpecificDistanceFromStart(lineSegmentStart, lineSegmentEnd, lenght / 2);
         }
     }
 }

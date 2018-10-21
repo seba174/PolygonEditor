@@ -17,6 +17,8 @@ namespace PolygonEditor
 
         bool DeleteVertice(Vertice v);
 
+        void SplitEdge(Edge e);
+
         bool ChangeEdgeType(Edge edge, EdgeType edgeType, int lenght);
     }
 }
