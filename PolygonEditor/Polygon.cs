@@ -42,6 +42,13 @@ namespace PolygonEditor
             int oldLenght = edge.Length;
 
             edge.Type = edgeType;
+
+            if (!ValidateEdgeTypes(edge))
+            {
+                edge.Type = oldType;
+                return false;
+            }
+
             edge.Length = lenght;
 
             if (MoveVerticeSafely(edge.Endpoints[0], new Point()) || MoveVerticeSafely(edge.Endpoints[1], new Point()))
@@ -186,6 +193,17 @@ namespace PolygonEditor
             var edgesList = Edges.ToList();
             edgesList.Add(edge);
             Edges = edgesList;
+        }
+
+        private bool ValidateEdgeTypes(Edge edge)
+        {
+            foreach (var vertice in edge.Endpoints)
+            {
+                if (vertice.Edges.Where(e => e.Type == EdgeType.Horizontal).Count() == 2
+                    || vertice.Edges.Where(e => e.Type == EdgeType.Vertical).Count() == 2)
+                    return false;
+            }
+            return true;
         }
     }
 }
