@@ -5,7 +5,17 @@ namespace PolygonEditor
 {
     public partial class EdgeLenghtPicker : Form
     {
-        public int Lenght { get; private set; }
+        private int lenght;
+
+        public int Lenght
+        {
+            get => lenght;
+            set
+            {
+                lenght = value;
+                EdgeLengthTextBox.Text = lenght > 0 ? lenght.ToString() : string.Empty;
+            }
+        }
 
         public EdgeLenghtPicker()
         {
@@ -21,7 +31,7 @@ namespace PolygonEditor
         private void CancelButtonClick(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
-            this.Close();
+            Close();
         }
 
         private void OkButtonClick(object sender, EventArgs e)
@@ -30,7 +40,7 @@ namespace PolygonEditor
             if (EdgeLenghtErrorProvider.GetError(EdgeLengthTextBox) == string.Empty)
             {
                 DialogResult = DialogResult.OK;
-                this.Close();
+                Close();
             }
         }
 

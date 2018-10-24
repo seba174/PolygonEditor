@@ -10,7 +10,7 @@ namespace PolygonEditor
         public EdgeType Type { get; set; }
         public int Length { get; set; }
 
-        public Edge() => Endpoints = new Vertice[2]; 
+        public Edge() => Endpoints = new Vertice[2];
 
         public Vertice GetSecondEndpoint(Vertice endpoint)
         {

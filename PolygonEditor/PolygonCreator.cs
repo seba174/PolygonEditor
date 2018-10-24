@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using static PolygonEditor.EdgeType;
 
 namespace PolygonEditor
 {
@@ -33,7 +34,7 @@ namespace PolygonEditor
                 };
                 edge.Endpoints[0] = vertices[leftVerticeIndex];
                 edge.Endpoints[1] = vertices[rightVerticeIndex];
-                if (edge.Type == EdgeType.FixedLength)
+                if (edge.Type == FixedLength)
                 {
                     edge.Length = (int)PointUtilities.GetDistanceBetweenPoints(edge.Endpoints[0].Position, edge.Endpoints[1].Position);
                 }
@@ -44,6 +45,27 @@ namespace PolygonEditor
             }
 
             return new Polygon(vertices, edges);
+        }
+
+        public static Polygon GetSampleTriangle()
+        {
+            List<Point> verticesPositions = new List<Point> { new Point(100, 100), new Point(200, 200), new Point(200, 100) };
+            List<EdgeType> edgeTypes = new List<EdgeType> { Normal, Vertical, Horizontal };
+            return CreatePolygon(verticesPositions, edgeTypes);
+        }
+
+        public static Polygon GetSampleRectangle()
+        {
+            List<Point> verticesPositions = new List<Point> { new Point(100, 100), new Point(100, 200), new Point(250, 200), new Point(250, 100) };
+            List<EdgeType> edgeTypes = new List<EdgeType> { Vertical, Horizontal, Vertical, Horizontal };
+            return CreatePolygon(verticesPositions, edgeTypes);
+        }
+
+        public static Polygon GetCustom()
+        {
+            List<Point> verticesPositions = new List<Point> { new Point(100, 100), new Point(100, 200), new Point(200, 200), new Point(200, 300), new Point(300, 300), new Point(250, 100) };
+            List<EdgeType> edgeTypes = new List<EdgeType> { FixedLength, FixedLength, FixedLength, Horizontal, Normal, Horizontal };
+            return CreatePolygon(verticesPositions, edgeTypes);
         }
     }
 }
