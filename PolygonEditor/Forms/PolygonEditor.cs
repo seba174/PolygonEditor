@@ -131,7 +131,7 @@ namespace PolygonEditor
                 }
                 else
                 {
-                    ShowInformationDialog(ErrorMessages.CanNotDeleteVertice);
+                    InformationDialog.Show(ErrorMessages.CanNotDeleteVertice);
                 }
             }
             FakeButton.Focus();
@@ -214,7 +214,7 @@ namespace PolygonEditor
                 }
                 else
                 {
-                    ShowInformationDialog(errorMessage);
+                    InformationDialog.Show(errorMessage);
                 }
             }
         }
@@ -231,12 +231,6 @@ namespace PolygonEditor
                     HandleSimpleEdgeTypeChange(EdgeType.FixedLength, dialog.Lenght, errorMessage);
                 }
             }
-        }
-
-        private void ShowInformationDialog(string information)
-        {
-            InformationForm dialog = new InformationForm(information);
-            dialog.ShowDialog();
         }
 
         private EdgeLenghtPicker GetEdgeLenghtPickerDialog()
