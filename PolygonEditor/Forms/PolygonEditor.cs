@@ -17,6 +17,8 @@ namespace PolygonEditor
         public PolygonEditor()
         {
             InitializeComponent();
+            StartPosition = FormStartPosition.CenterScreen;
+
             polygons = new List<IPolygon> { PolygonCreator.GetCustom() };
             Vertice.ClickRadius = 10;
             Edge.ClickDistance = 5;
@@ -28,6 +30,7 @@ namespace PolygonEditor
                 OnElementSelection = OnElementSelection,
                 OnElementUnselection = OnElementUnselection
             };
+
             standardPolygonDrawer = new PolygonDrawer
             {
                 EdgeColor = Color.LightGray,
@@ -42,6 +45,7 @@ namespace PolygonEditor
                 IconFontName = "Arial",
                 IconFontSize = 12
             };
+
             selectedElementDrawer = new PolygonDrawer
             {
                 EdgeColor = Color.Red,
@@ -56,6 +60,8 @@ namespace PolygonEditor
                 IconFontName = standardPolygonDrawer.IconFontName,
                 IconFontSize = standardPolygonDrawer.IconFontSize
             };
+
+            #region Events pinning
 
             drawingArea.Paint += Draw;
             drawingArea.MouseDown += inputHandler.HandleMouseDown;
@@ -74,6 +80,8 @@ namespace PolygonEditor
             CreateRectangleButton.Click += CreateRectangle;
             CreateCustomButton.Click += CreateCustomPolygon;
             DeletePolygonButton.Click += DeleteSelectedPolygon;
+
+            #endregion
 
             UpdateButtons();
         }

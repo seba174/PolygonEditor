@@ -28,8 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PolygonEditor));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.EditPolygonGroupBox = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.DeletePolygonButton = new System.Windows.Forms.Button();
             this.FakeButton = new System.Windows.Forms.Button();
             this.CreateGroupBox = new System.Windows.Forms.GroupBox();
             this.CreateTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
@@ -48,11 +52,10 @@
             this.RemoveConstraintsButton = new System.Windows.Forms.Button();
             this.SplitButton = new System.Windows.Forms.Button();
             this.drawingArea = new System.Windows.Forms.PictureBox();
-            this.EditPolygonGroupBox = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.DeletePolygonButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.EditPolygonGroupBox.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.CreateGroupBox.SuspendLayout();
             this.CreateTableLayoutPanel.SuspendLayout();
             this.EditVerticeGroupBox.SuspendLayout();
@@ -60,8 +63,6 @@
             this.EditEdgeGroupBox.SuspendLayout();
             this.EditEdgeTableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.drawingArea)).BeginInit();
-            this.EditPolygonGroupBox.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -99,6 +100,46 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(191, 805);
             this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // EditPolygonGroupBox
+            // 
+            this.EditPolygonGroupBox.Controls.Add(this.tableLayoutPanel3);
+            this.EditPolygonGroupBox.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.EditPolygonGroupBox.Location = new System.Drawing.Point(3, 388);
+            this.EditPolygonGroupBox.Name = "EditPolygonGroupBox";
+            this.EditPolygonGroupBox.Size = new System.Drawing.Size(185, 50);
+            this.EditPolygonGroupBox.TabIndex = 1;
+            this.EditPolygonGroupBox.TabStop = false;
+            this.EditPolygonGroupBox.Text = "Edit polygon";
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 1;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Controls.Add(this.DeletePolygonButton, 0, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(179, 31);
+            this.tableLayoutPanel3.TabIndex = 0;
+            // 
+            // DeletePolygonButton
+            // 
+            this.DeletePolygonButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.DeletePolygonButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.DeletePolygonButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.ButtonFace;
+            this.DeletePolygonButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.DeletePolygonButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DeletePolygonButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.DeletePolygonButton.Location = new System.Drawing.Point(3, 3);
+            this.DeletePolygonButton.Name = "DeletePolygonButton";
+            this.DeletePolygonButton.Size = new System.Drawing.Size(173, 25);
+            this.DeletePolygonButton.TabIndex = 0;
+            this.DeletePolygonButton.TabStop = false;
+            this.DeletePolygonButton.Text = "Delete polygon";
+            this.DeletePolygonButton.UseVisualStyleBackColor = false;
             // 
             // FakeButton
             // 
@@ -347,46 +388,6 @@
             this.drawingArea.TabIndex = 1;
             this.drawingArea.TabStop = false;
             // 
-            // EditPolygonGroupBox
-            // 
-            this.EditPolygonGroupBox.Controls.Add(this.tableLayoutPanel3);
-            this.EditPolygonGroupBox.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.EditPolygonGroupBox.Location = new System.Drawing.Point(3, 388);
-            this.EditPolygonGroupBox.Name = "EditPolygonGroupBox";
-            this.EditPolygonGroupBox.Size = new System.Drawing.Size(185, 50);
-            this.EditPolygonGroupBox.TabIndex = 1;
-            this.EditPolygonGroupBox.TabStop = false;
-            this.EditPolygonGroupBox.Text = "Edit polygon";
-            // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.ColumnCount = 1;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.DeletePolygonButton, 0, 0);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 16);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 1;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(179, 31);
-            this.tableLayoutPanel3.TabIndex = 0;
-            // 
-            // DeletePolygonButton
-            // 
-            this.DeletePolygonButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.DeletePolygonButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.DeletePolygonButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.ButtonFace;
-            this.DeletePolygonButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.DeletePolygonButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DeletePolygonButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.DeletePolygonButton.Location = new System.Drawing.Point(3, 3);
-            this.DeletePolygonButton.Name = "DeletePolygonButton";
-            this.DeletePolygonButton.Size = new System.Drawing.Size(173, 25);
-            this.DeletePolygonButton.TabIndex = 0;
-            this.DeletePolygonButton.TabStop = false;
-            this.DeletePolygonButton.Text = "Delete polygon";
-            this.DeletePolygonButton.UseVisualStyleBackColor = false;
-            // 
             // PolygonEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -395,13 +396,15 @@
             this.ClientSize = new System.Drawing.Size(1184, 811);
             this.Controls.Add(this.tableLayoutPanel1);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1200, 850);
             this.Name = "PolygonEditor";
-            this.ShowIcon = false;
             this.Text = "Polygon Editor";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.EditPolygonGroupBox.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
             this.CreateGroupBox.ResumeLayout(false);
             this.CreateGroupBox.PerformLayout();
             this.CreateTableLayoutPanel.ResumeLayout(false);
@@ -411,8 +414,6 @@
             this.EditEdgeGroupBox.PerformLayout();
             this.EditEdgeTableLayoutPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.drawingArea)).EndInit();
-            this.EditPolygonGroupBox.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
