@@ -46,45 +46,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Edge.cs" />
-    <Compile Include="EdgeLenghtPicker.cs">
+    <Compile Include="Polygon\Edge.cs" />
+    <Compile Include="Forms\EdgeLenghtPicker.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EdgeLenghtPicker.Designer.cs">
+    <Compile Include="Forms\EdgeLenghtPicker.Designer.cs">
       <DependentUpon>EdgeLenghtPicker.cs</DependentUpon>
     </Compile>
-    <Compile Include="EdgeType.cs" />
-    <Compile Include="ErrorMessages.cs" />
-    <Compile Include="ExtensionsMethods.cs" />
-    <Compile Include="IClickable.cs" />
+    <Compile Include="Polygon\EdgeType.cs" />
+    <Compile Include="ErrorHandling\ErrorMessages.cs" />
+    <Compile Include="Utilities\ExtensionsMethods.cs" />
+    <Compile Include="Interfaces\IClickable.cs" />
     <Compile Include="DrawingAreaInputHandler.cs" />
-    <Compile Include="InformationForm.cs">
+    <Compile Include="Forms\InformationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InformationForm.Designer.cs">
+    <Compile Include="Forms\InformationForm.Designer.cs">
       <DependentUpon>InformationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="IPolygon.cs" />
-    <Compile Include="PointUtilities.cs" />
-    <Compile Include="Polygon.cs" />
-    <Compile Include="PolygonDrawer.cs" />
-    <Compile Include="PolygonEditor.cs">
+    <Compile Include="Interfaces\IPolygon.cs" />
+    <Compile Include="Utilities\PointUtilities.cs" />
+    <Compile Include="Polygon\Polygon.cs" />
+    <Compile Include="Polygon\PolygonDrawer.cs" />
+    <Compile Include="Forms\PolygonEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PolygonEditor.Designer.cs">
+    <Compile Include="Forms\PolygonEditor.Designer.cs">
       <DependentUpon>PolygonEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="PolygonCreator.cs" />
+    <Compile Include="Polygon\PolygonCreator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Vertice.cs" />
-    <EmbeddedResource Include="EdgeLenghtPicker.resx">
+    <Compile Include="Polygon\Vertice.cs" />
+    <EmbeddedResource Include="Forms\EdgeLenghtPicker.resx">
       <DependentUpon>EdgeLenghtPicker.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InformationForm.resx">
+    <EmbeddedResource Include="Forms\InformationForm.resx">
       <DependentUpon>InformationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PolygonEditor.resx">
+    <EmbeddedResource Include="Forms\PolygonEditor.resx">
       <DependentUpon>PolygonEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

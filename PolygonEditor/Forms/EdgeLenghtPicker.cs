@@ -24,7 +24,7 @@ namespace PolygonEditor
             EdgeLenghtErrorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
 
             OkButton.Click += OkButtonClick;
-            CancelButton.Click += CancelButtonClick;
+            TheCancelButton.Click += CancelButtonClick;
             EdgeLengthTextBox.TextChanged += (object s, EventArgs e) => ValidateTextBox();
         }
 

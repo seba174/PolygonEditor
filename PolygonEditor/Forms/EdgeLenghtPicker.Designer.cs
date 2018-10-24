@@ -35,15 +35,15 @@
             this.EdgeLengthTextBox = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.OkButton = new System.Windows.Forms.Button();
-            this.CancelButton = new System.Windows.Forms.Button();
-            this.EdgeLenghtErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.TheCancelButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
+            this.EdgeLenghtErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.EdgeLenghtErrorProvider)).BeginInit();
             this.tableLayoutPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.EdgeLenghtErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -107,39 +107,35 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.5F));
             this.tableLayoutPanel3.Controls.Add(this.OkButton, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.CancelButton, 3, 0);
+            this.tableLayoutPanel3.Controls.Add(this.TheCancelButton, 3, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 70);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 47F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(374, 47);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
             // OkButton
             // 
             this.OkButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.OkButton.Location = new System.Drawing.Point(87, 10);
+            this.OkButton.Location = new System.Drawing.Point(87, 9);
             this.OkButton.Name = "OkButton";
             this.OkButton.Size = new System.Drawing.Size(87, 29);
             this.OkButton.TabIndex = 0;
             this.OkButton.Text = "OK";
             this.OkButton.UseVisualStyleBackColor = true;
             // 
-            // CancelButton
+            // TheCancelButton
             // 
-            this.CancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.CancelButton.Location = new System.Drawing.Point(198, 10);
-            this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Size = new System.Drawing.Size(87, 29);
-            this.CancelButton.TabIndex = 1;
-            this.CancelButton.Text = "Cancel";
-            this.CancelButton.UseVisualStyleBackColor = true;
-            // 
-            // EdgeLenghtErrorProvider
-            // 
-            this.EdgeLenghtErrorProvider.ContainerControl = this;
+            this.TheCancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.TheCancelButton.Location = new System.Drawing.Point(198, 9);
+            this.TheCancelButton.Name = "TheCancelButton";
+            this.TheCancelButton.Size = new System.Drawing.Size(87, 29);
+            this.TheCancelButton.TabIndex = 1;
+            this.TheCancelButton.Text = "Cancel";
+            this.TheCancelButton.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel4
             // 
@@ -166,6 +162,10 @@
             this.label2.Text = "Provide edge length";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // EdgeLenghtErrorProvider
+            // 
+            this.EdgeLenghtErrorProvider.ContainerControl = this;
+            // 
             // EdgeLenghtPicker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -183,9 +183,9 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.EdgeLenghtErrorProvider)).EndInit();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.EdgeLenghtErrorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -198,7 +198,7 @@
         private System.Windows.Forms.TextBox EdgeLengthTextBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Button OkButton;
-        private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.Button TheCancelButton;
         private System.Windows.Forms.ErrorProvider EdgeLenghtErrorProvider;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Label label2;
