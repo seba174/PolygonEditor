@@ -63,8 +63,11 @@ namespace PolygonEditor
 
         public static Polygon GetCustom()
         {
-            List<Point> verticesPositions = new List<Point> { new Point(100, 100), new Point(100, 200), new Point(200, 200), new Point(200, 300), new Point(300, 300), new Point(250, 100) };
-            List<EdgeType> edgeTypes = new List<EdgeType> { FixedLength, FixedLength, FixedLength, Horizontal, Normal, Horizontal };
+            List<Point> verticesPositions = new List<Point>
+            {
+                new Point(300, 100), new Point(300, 200), new Point(400, 200), new Point(400, 300), new Point(500, 300), new Point(450, 100)
+            };
+            List<EdgeType> edgeTypes = new List<EdgeType> { FixedLength, Normal, FixedLength, Horizontal, Normal, Horizontal };
             return CreatePolygon(verticesPositions, edgeTypes);
         }
     }

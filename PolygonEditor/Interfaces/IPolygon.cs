@@ -7,9 +7,9 @@ namespace PolygonEditor
     {
         IEnumerable<IClickable> Clickables { get; }
 
-        IEnumerable<Vertice> Vertices { get; }
+        List<Vertice> Vertices { get; }
 
-        IEnumerable<Edge> Edges { get; }
+        List<Edge> Edges { get; }
 
         bool HandleClickableMove(IClickable clickableElement, Point offset);
 
@@ -18,6 +18,10 @@ namespace PolygonEditor
         bool DeleteVertice(Vertice v);
 
         void SplitEdge(Edge e);
+
+        void AddVertice(Vertice vertice, Vertice endpoint1, Vertice endpoint2);
+
+        void CreateEdgeBetweenVertices(Vertice v1, Vertice v2);
 
         bool ChangeEdgeType(Edge edge, EdgeType edgeType, int lenght);
     }

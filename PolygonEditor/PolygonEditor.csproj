@@ -47,6 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ErrorHandling\InformationDialog.cs" />
+    <Compile Include="Interfaces\InputHandler.cs" />
+    <Compile Include="InputHandlers\InputHandlerForPolygonCreation.cs" />
     <Compile Include="Polygon\Edge.cs" />
     <Compile Include="Forms\EdgeLenghtPicker.cs">
       <SubType>Form</SubType>
@@ -58,7 +60,7 @@
     <Compile Include="ErrorHandling\ErrorMessages.cs" />
     <Compile Include="Utilities\ExtensionsMethods.cs" />
     <Compile Include="Interfaces\IClickable.cs" />
-    <Compile Include="DrawingAreaInputHandler.cs" />
+    <Compile Include="InputHandlers\DrawingAreaInputHandler.cs" />
     <Compile Include="Forms\InformationForm.cs">
       <SubType>Form</SubType>
     </Compile>

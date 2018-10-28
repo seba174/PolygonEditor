@@ -6,5 +6,6 @@ namespace PolygonEditor
         public const string CanNotChangeEdgeType = "Can not change edge type to {0}";
         public const string CanNotChangeEdgeLenght = "Can not change edge lenght";
         public const string CanNotDeleteVertice = "Can not delete selected vertice";
+        public const string PolygonMustHaveAtLeastThreeVertices = "Polygon must have at least 3 vertices";
     }
 }

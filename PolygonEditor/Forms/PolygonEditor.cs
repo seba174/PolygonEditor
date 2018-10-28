@@ -9,7 +9,7 @@ namespace PolygonEditor
 {
     public partial class PolygonEditor : Form
     {
-        private DrawingAreaInputHandler inputHandler;
+        private InputHandler inputHandler;
         private PolygonDrawer standardPolygonDrawer;
         private PolygonDrawer selectedElementDrawer;
         private List<IPolygon> polygons;
@@ -23,13 +23,7 @@ namespace PolygonEditor
             Vertice.ClickRadius = 10;
             Edge.ClickDistance = 5;
 
-            inputHandler = new DrawingAreaInputHandler()
-            {
-                HandledPolygons = polygons,
-                OnSuccessfullElementMove = drawingArea.Refresh,
-                OnElementSelection = OnElementSelection,
-                OnElementUnselection = OnElementUnselection
-            };
+            inputHandler = GetStandardInputHandler();
 
             standardPolygonDrawer = new PolygonDrawer
             {
@@ -64,9 +58,7 @@ namespace PolygonEditor
             #region Events pinning
 
             drawingArea.Paint += Draw;
-            drawingArea.MouseDown += inputHandler.HandleMouseDown;
-            drawingArea.MouseUp += inputHandler.HandleMouseUp;
-            drawingArea.MouseMove += inputHandler.HandleMouseMove;
+            AttachInputHandlerEventsToDrawingArea();
 
             MakeVerticalButton.Click += ChangeSelectedEdgeToVertical;
             MakeHorizontalButton.Click += ChangeSelectedEdgeToHorizontal;
@@ -80,6 +72,8 @@ namespace PolygonEditor
             CreateRectangleButton.Click += CreateRectangle;
             CreateCustomButton.Click += CreateCustomPolygon;
             DeletePolygonButton.Click += DeleteSelectedPolygon;
+            StartDrawingButton.Click += StartDrawingPolygon;
+            StopDrawingButton.Click += StopDrawingPolygon;
 
             #endregion
 
@@ -174,6 +168,59 @@ namespace PolygonEditor
         {
             polygons.Add(PolygonCreator.GetCustom());
             FakeButton.Focus();
+            drawingArea.Refresh();
+        }
+
+        private void StartDrawingPolygon(object sender, EventArgs e)
+        {
+            DetachInputHandlerEventsFromDrawingArea();
+
+            IPolygon polygonUnderCreation = new Polygon(new List<Vertice>(), new List<Edge>());
+            polygonUnderCreation.AddVertice(new Vertice(), null, null);
+            polygons.Add(polygonUnderCreation);
+
+            inputHandler = new InputHandlerForPolygonCreation
+            {
+                OnSuccessfullElementMove = drawingArea.Refresh,
+                OnVerticeAdd = drawingArea.Refresh,
+                OnFinishedDrawing = StopDrawingPolygon,
+                PolygonUnderCreation = polygonUnderCreation
+            };
+
+            AttachInputHandlerEventsToDrawingArea();
+
+            UpdateButtons();
+            foreach (var button in CreateGroupBox.FindAllChildrenByType<Button>())
+                button.Enabled = false;
+            StopDrawingButton.Enabled = true;
+            drawingArea.Refresh();
+            FakeButton.Focus();
+        }
+
+        private void StopDrawingPolygon(object sender, EventArgs e)
+        {
+            StopDrawingPolygon();
+        }
+
+        private void StopDrawingPolygon()
+        {
+            FakeButton.Focus();
+            IPolygon polygonUnderCreation = polygons.Last();
+            if (polygonUnderCreation.Vertices.Count <= 3)
+            {
+                InformationDialog.Show(ErrorMessages.PolygonMustHaveAtLeastThreeVertices);
+                return;
+            }
+
+            DetachInputHandlerEventsFromDrawingArea();
+
+            polygonUnderCreation.DeleteVertice(polygonUnderCreation.Vertices.Last());
+            polygonUnderCreation.CreateEdgeBetweenVertices(polygonUnderCreation.Vertices.First(), polygonUnderCreation.Vertices.Last());
+
+            inputHandler = GetStandardInputHandler();
+            AttachInputHandlerEventsToDrawingArea();
+
+            UpdateButtons();
             drawingArea.Refresh();
         }
 
@@ -283,6 +330,35 @@ namespace PolygonEditor
                 foreach (var button in EditPolygonGroupBox.FindAllChildrenByType<Button>())
                     button.Enabled = false;
             }
+            foreach (var button in CreateGroupBox.FindAllChildrenByType<Button>())
+                button.Enabled = true;
+
+            StopDrawingButton.Enabled = false;
+        }
+
+        private void AttachInputHandlerEventsToDrawingArea()
+        {
+            drawingArea.MouseDown += inputHandler.HandleMouseDown;
+            drawingArea.MouseUp += inputHandler.HandleMouseUp;
+            drawingArea.MouseMove += inputHandler.HandleMouseMove;
+        }
+
+        private void DetachInputHandlerEventsFromDrawingArea()
+        {
+            drawingArea.MouseDown -= inputHandler.HandleMouseDown;
+            drawingArea.MouseUp -= inputHandler.HandleMouseUp;
+            drawingArea.MouseMove -= inputHandler.HandleMouseMove;
+        }
+
+        private InputHandler GetStandardInputHandler()
+        {
+            return new DrawingAreaInputHandler()
+            {
+                HandledPolygons = polygons,
+                OnSuccessfullElementMove = drawingArea.Refresh,
+                OnElementSelection = OnElementSelection,
+                OnElementUnselection = OnElementUnselection
+            };
         }
     }
 }

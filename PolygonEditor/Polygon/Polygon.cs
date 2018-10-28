@@ -7,14 +7,14 @@ namespace PolygonEditor
 {
     public class Polygon : IPolygon
     {
-        public IEnumerable<Vertice> Vertices { get; private set; }
-        public IEnumerable<Edge> Edges { get; private set; }
+        public List<Vertice> Vertices { get; private set; }
+        public List<Edge> Edges { get; private set; }
         public IEnumerable<IClickable> Clickables => Vertices.Concat(Edges.Cast<IClickable>());
 
         public Polygon(IEnumerable<Vertice> vertices, IEnumerable<Edge> edges)
         {
-            this.Vertices = vertices;
-            this.Edges = edges;
+            this.Vertices = vertices.ToList();
+            this.Edges = edges.ToList();
         }
 
         public bool HandleClickableMove(IClickable clickable, Point offset)
@@ -70,10 +70,10 @@ namespace PolygonEditor
                 return false;
             }
 
-            var neighbour1 = v.Edges[0].GetSecondEndpoint(v);
-            var neighbour2 = v.Edges[1].GetSecondEndpoint(v);
-            neighbour1.DisconnectEdge(v.Edges[0]);
-            neighbour2.DisconnectEdge(v.Edges[1]);
+            var neighbour1 = v.Edges[0]?.GetSecondEndpoint(v);
+            var neighbour2 = v.Edges[1]?.GetSecondEndpoint(v);
+            neighbour1?.DisconnectEdge(v.Edges[0]);
+            neighbour2?.DisconnectEdge(v.Edges[1]);
 
             edgesList.RemoveAll(e => v.Edges.Contains(e));
             verticesList.Remove(v);
@@ -109,13 +109,43 @@ namespace PolygonEditor
             Edges = edgesList;
         }
 
+        public void AddVertice(Vertice vertice, Vertice endpoint1, Vertice endpoint2)
+        {
+            CreateEdgeBetweenVertices(vertice, endpoint1);
+            CreateEdgeBetweenVertices(vertice, endpoint2);
+
+            var vertices = Vertices.ToList();
+            vertices.Add(vertice);
+            Vertices = vertices;
+        }
+
+        public void CreateEdgeBetweenVertices(Vertice v1, Vertice v2)
+        {
+            if (v1 == null || v2 == null)
+                return;
+
+            Edge edge = new Edge()
+            {
+                Type = EdgeType.Normal
+            };
+            edge.Endpoints[0] = v1;
+            edge.Endpoints[1] = v2;
+
+            v1.ConnectEdge(edge);
+            v2.ConnectEdge(edge);
+
+            var edgesList = Edges.ToList();
+            edgesList.Add(edge);
+            Edges = edgesList;
+        }
+
         private bool MoveVerticeSafely(Vertice original, Point offset)
         {
             List<Point> oldPositions = Vertices.Select(v => v.Position).ToList();
             Point newPosition = new Point(original.Position.X + offset.X, original.Position.Y + offset.Y);
             original.Position = newPosition;
 
-            if (RepairEdges(original, original.Edges[0]))
+            if (original.Edges[0] == null || RepairEdges(original, original.Edges[0]))
             {
                 return true;
             }
@@ -126,7 +156,7 @@ namespace PolygonEditor
             }
 
             original.Position = newPosition;
-            if (RepairEdges(original, original.Edges[1]))
+            if (original.Edges[1] == null || RepairEdges(original, original.Edges[1]))
             {
                 return true;
             }
@@ -142,6 +172,8 @@ namespace PolygonEditor
         private bool RepairEdges(Vertice vertice, Edge edgeToStartFrom)
         {
             RepairEdgeRecursion(vertice, edgeToStartFrom, vertice);
+            if (vertice.GetSecondEdge(edgeToStartFrom) == null)
+                return true;
             return RepairEdgeRecursion(vertice, vertice.GetSecondEdge(edgeToStartFrom), vertice);
         }
 
@@ -176,23 +208,6 @@ namespace PolygonEditor
             }
 
             return true;
-        }
-
-        private void CreateEdgeBetweenVertices(Vertice v1, Vertice v2)
-        {
-            Edge edge = new Edge()
-            {
-                Type = EdgeType.Normal
-            };
-            edge.Endpoints[0] = v1;
-            edge.Endpoints[1] = v2;
-
-            v1.ConnectEdge(edge);
-            v2.ConnectEdge(edge);
-
-            var edgesList = Edges.ToList();
-            edgesList.Add(edge);
-            Edges = edgesList;
         }
 
         private bool ValidateEdgeTypes(Edge edge)

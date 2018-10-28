@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace PolygonEditor
 {
-    public class DrawingAreaInputHandler
+    public class DrawingAreaInputHandler : InputHandler
     {
         private bool isLeftMouseButtonClicked;
         private bool isMiddleMouseButtonClicked;
