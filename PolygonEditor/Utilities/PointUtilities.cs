@@ -7,9 +7,7 @@ namespace PolygonEditor
     {
         public static double GetDistanceBetweenPoints(Point point1, Point point2)
         {
-            int centerDx = point1.X - point2.X;
-            int centerDy = point1.Y - point2.Y;
-            return Math.Sqrt(centerDx * centerDx + centerDy * centerDy);
+            return Math.Sqrt(SquaredDistanceBetweenPoints(point1, point2));
         }
 
         public static Point GetPointOnLineWithSpecificDistanceFromStart(Point lineSegmentStart, Point lineSegmentEnd, double distance)
@@ -61,6 +59,13 @@ namespace PolygonEditor
         {
             double lenght = GetDistanceBetweenPoints(lineSegmentStart, lineSegmentEnd);
             return GetPointOnLineWithSpecificDistanceFromStart(lineSegmentStart, lineSegmentEnd, lenght / 2);
+        }
+
+        public static int SquaredDistanceBetweenPoints(Point point1, Point point2)
+        {
+            int centerDx = point1.X - point2.X;
+            int centerDy = point1.Y - point2.Y;
+            return centerDx * centerDx + centerDy * centerDy;
         }
     }
 }

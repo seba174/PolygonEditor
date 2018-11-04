@@ -49,6 +49,7 @@
     <Compile Include="ErrorHandling\InformationDialog.cs" />
     <Compile Include="Interfaces\InputHandler.cs" />
     <Compile Include="InputHandlers\InputHandlerForPolygonCreation.cs" />
+    <Compile Include="Polygon\ConvexHullOfPolygon.cs" />
     <Compile Include="Polygon\Edge.cs" />
     <Compile Include="Forms\EdgeLenghtPicker.cs">
       <SubType>Form</SubType>

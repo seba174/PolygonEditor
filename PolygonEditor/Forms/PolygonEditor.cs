@@ -74,6 +74,7 @@ namespace PolygonEditor
             DeletePolygonButton.Click += DeleteSelectedPolygon;
             StartDrawingButton.Click += StartDrawingPolygon;
             StopDrawingButton.Click += StopDrawingPolygon;
+            ConvexHullButton.Click += ChangeCurrentPolygonToConvexHull;
 
             #endregion
 
@@ -222,6 +223,23 @@ namespace PolygonEditor
 
             UpdateButtons();
             drawingArea.Refresh();
+        }
+
+        private void ChangeCurrentPolygonToConvexHull(object sender, EventArgs e)
+        {
+            if (inputHandler.SelectedPolygon != null)
+            {
+                IPolygon polygonToChange = inputHandler.SelectedPolygon;
+                IPolygon convexHull = ConvexHullOfPolygon.GetConvexHull(polygonToChange);
+                if (convexHull != null)
+                {
+                    polygons.Remove(polygonToChange);
+                    polygons.Add(convexHull);
+                }
+                inputHandler.ClearSelected();
+                drawingArea.Refresh();
+            }
+            FakeButton.Focus();
         }
 
         private void DeleteSelectedPolygon(object sender, EventArgs e)
